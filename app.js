@@ -1,5 +1,6 @@
 // const path = require('path');
 const express = require('express');
+// cors auth header(auth)
 const cors = require('cors');
 const morgan = require('morgan');
 // HTTP request logger middleware for node.js
@@ -23,7 +24,7 @@ const hpp = require('hpp');
 const userRouter = require('./routes/userRoute');
 
 const app = express();
-// cors auth header(auth)
+
 app.use(cors());
 
 /// /////////////////
