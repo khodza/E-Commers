@@ -19,6 +19,7 @@ const createSendToken = (user, statusCode, res) => {
   res.status(statusCode).json({
     status: 'succes',
     token,
+    cookieOptions,
     data: {
       user,
     },
