@@ -67,3 +67,12 @@ exports.protect = async function (req, res, next) {
   req.user = currentUser;
   next();
 };
+
+exports.restrictTo = function (...roles) {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      return next(new AppError('You are not allowed to perform this action', 403));
+    }
+    next();
+  };
+};
