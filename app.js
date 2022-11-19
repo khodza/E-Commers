@@ -17,6 +17,8 @@ const xss = require('xss-clean');
 // xss is a module used to filter input from users to prevent XSS attacks.
 const hpp = require('hpp');
 // Express middleware to protect against HTTP Parameter Pollution attacks
+
+const errorHandler = require('./handlers/errorHandler');
 // /////////////////////////////////////////
 // IMPORTING ROUTERS
 // /////////////////////////////////////////
@@ -79,5 +81,6 @@ app.all('*', (req, res, next) => {
 });
 
 // GLOBAL ERROR HANDLER
+app.use(errorHandler);
 
 module.exports = app;

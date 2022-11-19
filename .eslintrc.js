@@ -15,5 +15,10 @@ module.exports = {
     'consistent-return': 0,
     'no-return-await': 0,
     'prefer-destructuring': 0,
+    'no-underscore-dangle': 0,
+    'no-param-reassign': 0,
+    'func-names': 0,
+    radix: 0,
+    'no-unused-vars': ['error', { argsIgnorePattern: 'req|res|next|val' }],
   },
 };
