@@ -1,6 +1,8 @@
 const catchAsync = require('../utils/catchAsync');
+const AppError = require('../utils/appError');
 
 exports.getAll = (Model) => catchAsync(async (req, res, next) => {
+  // Filters should be added
   const doc = await Model.find();
 
   res.status(200).json({
@@ -8,6 +10,19 @@ exports.getAll = (Model) => catchAsync(async (req, res, next) => {
     result: doc.length,
     data: {
       data: doc,
+    },
+  });
+});
+exports.getOne = (Model) => catchAsync(async (req, res, next) => {
+  // Shold add popOptions for comments ,products, reviews
+  const doc = await Model.findById(req.params.id);
+  if (!doc) {
+    return next(new AppError('Document with given ID not found', 404));
+  }
+  res.status(200).json({
+    status: 'succes',
+    data: {
+      doc,
     },
   });
 });
