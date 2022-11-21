@@ -1,5 +1,6 @@
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
+const User = require('../modules/usersModule');
 
 exports.getAll = (Model) => catchAsync(async (req, res, next) => {
   // Filters should be added
@@ -25,4 +26,29 @@ exports.getOne = (Model) => catchAsync(async (req, res, next) => {
       doc,
     },
   });
+});
+exports.updateOne = (Model) => catchAsync(async (req, res, next) => {
+  const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
+  if (Model === User) {
+    doc.password = req.body.password;
+    await doc.save({ validateBeforeSave: false });
+    doc.password = undefined;
+  }
+  if (!doc) {
+    return next(new AppError('Document with given ID not found!', 404));
+  }
+
+  res.status(200).json({
+    status: 'succes',
+    data: {
+      data: doc,
+    },
+  });
+});
+
+exports.deleteOne = (Model) => catchAsync(async (req, res, next) => {
+  console.log('not defined');
 });

@@ -1,0 +1,32 @@
+[
+	{
+		"id": 1,
+		"name": "Krasofka",
+		"gender": ["women", "men", "kids"],
+		"model": "Nike",
+		"category": "shoes",
+		"season": ["winter", "autumn"],
+		"coverImg": "https://picsum.photos/id/6/300/200",
+		"seller": 1,
+		"createdAt": "2022-11-19 18:10:12",
+		"image": [
+			"https://picsum.photos/id/1/300/200",
+			"https://picsum.photos/id/2/300/200",
+			"https://picsum.photos/id/3/300/200",
+			"https://picsum.photos/id/4/300/200",
+			"https://picsum.photos/id/5/300/200"
+		],
+		"inStock": true,
+		"ratingsAvg": 5,
+		"ratingsCount": 0,
+		"style": ["sport", "party"],
+		"price": {
+			"currency": "USD",
+			"amount": 120
+		},
+		"quantity": 180,
+		"sizes": [34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44],
+		"color": ["black", "white", "purple", "yellow"],
+		"description": "Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"
+	}
+]
