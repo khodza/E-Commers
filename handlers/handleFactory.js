@@ -50,5 +50,12 @@ exports.updateOne = (Model) => catchAsync(async (req, res, next) => {
 });
 
 exports.deleteOne = (Model) => catchAsync(async (req, res, next) => {
-  console.log('not defined');
+  const doc = await Model.findByIdAndDelete(req.params.id);
+  if (!doc) {
+    return next(new AppError('Document with given ID not found'));
+  }
+  res.status(204).json({
+    status: 'deleted',
+    data: null,
+  });
 });
