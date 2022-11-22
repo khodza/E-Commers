@@ -8,6 +8,7 @@ const router = express.Router();
 router.post('/signup', authController.signUp);
 router.post('/login', authController.login);
 router.get('/me', authController.protect, userController.getMe, userController.getUser);
+router.delete('/deleteMe', authController.protect, userController.getMe, userController.deleteUser);
 
 // ADDING PROTECT MIDDLEWARE TO ALL ROUTES BELOW
 router.use(authController.protect);
