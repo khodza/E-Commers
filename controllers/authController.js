@@ -53,8 +53,10 @@ exports.protect = async function (req, res, next) {
   if (!token) {
     return next(new AppError('You are not logged in', 401));
   }
+
   const decoded = await util.promisify(jwt.verify)(token, process.env.JWT_SECRET);
   const currentUser = await User.findById(decoded.id);
+
   if (!currentUser) {
     return next(new AppError('The user belonging to this token no longer exist!', 401));
   }
