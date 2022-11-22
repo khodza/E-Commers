@@ -10,7 +10,7 @@ router.post('/login', authController.login);
 router.get('/me', authController.protect, userController.getMe, userController.getUser);
 router.delete('/deleteme', authController.protect, userController.getMe, userController.deleteUser);
 router.patch('/updateme', authController.protect, userController.updateMe, userController.updateUser);
-
+router.patch('/updatemypassword', authController.protect, authController.updateMyPassword);
 // ADDING PROTECT MIDDLEWARE TO ALL ROUTES BELOW
 router.use(authController.protect);
 

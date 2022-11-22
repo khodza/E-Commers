@@ -78,3 +78,16 @@ exports.restrictTo = function (...roles) {
     next();
   };
 };
+
+exports.updateMyPassword = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.user.id).select('+password');
+  console.log(user);
+  if (!await user.correctPassword(req.body.passwordCurrent, user.password)) {
+    return next(new AppError('Your curret password is wrong!', 400));
+  }
+  user.password = req.body.password;
+  user.passwordConfirm = req.body.passwordConfirm;
+  await user.save();
+
+  createSendToken(user, 200, res);
+});
