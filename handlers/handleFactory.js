@@ -32,8 +32,9 @@ exports.updateOne = (Model) => catchAsync(async (req, res, next) => {
     new: true,
     runValidators: true,
   });
-  if (Model === User) {
+  if (Model === User && req.body.password) {
     doc.password = req.body.password;
+    doc.passwordConfirm = req.body.passwordConfirm;
     await doc.save({ validateBeforeSave: false });
     doc.password = undefined;
   }
