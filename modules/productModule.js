@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const arrayValidator = require('mongoose-array-validator');
 const User = require('./usersModule');
 
 const productSchema = new mongoose.Schema({
@@ -33,7 +34,23 @@ const productSchema = new mongoose.Schema({
 
   },
 
-  images: [{ type: String, required: [true, 'Add images of product'] }],
+  images: {
+    type: [String],
+    required: [true, 'Add images of product'],
+    minItems: {
+      value: 2,
+      message: (props) => `length of \`${props.path}\` (${props.value.length}) is less than allowed!`,
+    },
+    maxItems: {
+      value: 10,
+      message: (props) => `length of \`${props.path}\` (${props.value.length}) is more than allowed!`,
+    },
+    uniqueItems: {
+      value: true,
+      message: (props) => 'No duplicates allowed in images!',
+    },
+
+  },
 
   inStock: {
     type: Boolean,
@@ -86,6 +103,12 @@ const productSchema = new mongoose.Schema({
   },
 });
 
+productSchema.virtual('discountPercent').get(function () {
+  const realPer = 100 - (this.discountPrice * 100) / this.price;
+  return Math.round(realPer * 10) / 10;
+});
+
+productSchema.plugin(arrayValidator);
 const Product = mongoose.model('Products', productSchema);
 
 module.exports = Product;

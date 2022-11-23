@@ -19,6 +19,6 @@ module.exports = {
     'no-param-reassign': 0,
     'func-names': 0,
     radix: 0,
-    'no-unused-vars': ['error', { argsIgnorePattern: 'req|res|next|val' }],
+    'no-unused-vars': ['error', { argsIgnorePattern: 'req|res|next|val|props' }],
   },
 };
