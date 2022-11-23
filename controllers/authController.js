@@ -83,7 +83,6 @@ exports.restrictTo = function (...roles) {
 
 exports.updateMyPassword = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.user.id).select('+password');
-  console.log(user);
   if (!await user.correctPassword(req.body.passwordCurrent, user.password)) {
     return next(new AppError('Your curret password is wrong!', 400));
   }
@@ -129,7 +128,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 
 exports.resetPassword = catchAsync(async (req, res, next) => {
   const hashedToken = crypto.createHash('sha256').update(req.params.token).digest('hex');
-  console.log(hashedToken);
+
   const user = await User.findOne({ passwordResetToken: hashedToken, passwordResetExpires: { $gt: Date.now() } });
 
   if (!user) {
