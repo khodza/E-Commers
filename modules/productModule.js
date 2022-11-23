@@ -33,7 +33,7 @@ const productSchema = new mongoose.Schema({
 
   },
 
-  image: [{ type: String, required: [true, 'Add images of product'] }],
+  images: [{ type: String, required: [true, 'Add images of product'] }],
 
   inStock: {
     type: Boolean,

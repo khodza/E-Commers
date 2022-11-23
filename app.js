@@ -24,6 +24,7 @@ const errorHandler = require('./handlers/errorHandler');
 // /////////////////////////////////////////
 
 const userRouter = require('./routes/userRoute');
+const productRouter = require('./routes/productRoute');
 
 const app = express();
 
@@ -71,6 +72,7 @@ app.use(
 /// ////////////////////////////
 
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/products', productRouter);
 
 // Error for all not existing routes
 app.all('*', (req, res, next) => {
