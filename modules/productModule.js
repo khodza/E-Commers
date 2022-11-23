@@ -42,7 +42,7 @@ const productSchema = new mongoose.Schema({
       message: (props) => `length of \`${props.path}\` (${props.value.length}) is less than allowed!`,
     },
     maxItems: {
-      value: 10,
+      value: 4,
       message: (props) => `length of \`${props.path}\` (${props.value.length}) is more than allowed!`,
     },
     uniqueItems: {

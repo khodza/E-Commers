@@ -5,6 +5,6 @@ const productController = require('../controllers/productController');
 
 const router = express.Router();
 
-router.route('/').get(productController.getAllProducts).post(authController.protect, productController.addProduct);
+router.route('/').get(productController.getAllProducts).post(authController.protect, authController.restrictTo('admin'), productController.addProduct);
 
 module.exports = router;
