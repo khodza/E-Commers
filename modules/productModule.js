@@ -101,11 +101,13 @@ const productSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
   },
+}, {
+  toJSON: { virtuals: true },
+  toObject: { virtuals: true },
 });
 
 productSchema.virtual('discountPercent').get(function () {
-  const realPer = 100 - (this.discountPrice * 100) / this.price;
-  return Math.round(realPer * 10) / 10;
+  return Math.round((100 - (this.discountPrice * 100) / this.price) * 10) / 10;
 });
 
 productSchema.plugin(arrayValidator);
