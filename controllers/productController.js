@@ -7,3 +7,4 @@ exports.addProduct = handleFactory.createOne(Product);
 exports.getAllProducts = handleFactory.getAll(Product);
 exports.getProduct = handleFactory.getOne(Product);
 exports.updateProduct = handleFactory.updateOne(Product);
+exports.deleteProduct = handleFactory.deleteOne(Product);
