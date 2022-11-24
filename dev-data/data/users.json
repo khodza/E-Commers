@@ -3,8 +3,37 @@
 		"name": "Izzat",
 		"email": "khodzapro@gmail.com",
 		"role": "admin",
-		"active": true,
-		"photo": "user-1.jpg",
-		"password": "qwerty2003"
+		"photo": "https://avatars.githubusercontent.com/u/96073464?s=400&u=8d6e97088486043e25e5c1100f68d41ba5b5fbe9&v=4",
+		"password": "qwerty2003",
+		"passwordConfirm": "qwerty2003"
+	},
+	{
+		"name": "Ulug'bek",
+		"email": "temirovulugbek2003@gmail.com",
+		"role": "admin",
+		"photo": "https://avatars.githubusercontent.com/u/85108522?v=4",
+		"password": "12345678",
+		"passwordConfirm": "12345678"
+	},
+	{
+		"name": "Abdusamad",
+		"email": "sevbofx@gmail.com",
+		"photo": "https://avatars.githubusercontent.com/u/94049540?v=4",
+		"password": "12345678",
+		"passwordConfirm": "12345678"
+	},
+	{
+		"name": "Jamshid",
+		"email": "jamik.oik.group@gmail.com",
+		"photo": "https://avatars.githubusercontent.com/u/97092186?v=4",
+		"password": "12345678",
+		"passwordConfirm": "12345678"
+	},
+	{
+		"name": "Jamshid",
+		"email": "jamshidgolang@gmail.com",
+		"photo": "https://avatars.githubusercontent.com/u/102946716?v=4",
+		"password": "12345678",
+		"passwordConfirm": "12345678"
 	}
 ]

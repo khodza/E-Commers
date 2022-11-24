@@ -20,7 +20,7 @@ const products = JSON.parse(fs.readFileSync(`${__dirname}/products.json`, 'utf-8
 
 const importData = async () => {
   try {
-    await User.create(users, { validateBeforeSave: false });
+    await User.create(users);
     await Product.create(products);
     console.log('Data loaded succesifully!');
   } catch (err) {

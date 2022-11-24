@@ -1,11 +1,13 @@
 const mongoose = require('mongoose');
 const arrayValidator = require('mongoose-array-validator');
+const slugify = require('slugify');
 const User = require('./usersModule');
 
 const productSchema = new mongoose.Schema({
   name: {
     type: String,
     trim: true,
+    unique: true,
     required: [true, 'Please add product name'],
     maxlength: [40, 'The Product must have less or equal 40 characters'],
     minlength: [5, 'The Product must have more or equal 5 characters'],
@@ -106,10 +108,16 @@ const productSchema = new mongoose.Schema({
   toObject: { virtuals: true },
 });
 
+productSchema.index({ slug: 1 });
 productSchema.virtual('discountPercent').get(function () {
   return Math.round((100 - (this.discountPrice * 100) / this.price) * 10) / 10;
 });
 
+productSchema.pre('save', function (next) {
+  this.slug = slugify(this.name, { lower: true });
+  console.log(this.slug);
+  next();
+});
 productSchema.plugin(arrayValidator);
 const Product = mongoose.model('Products', productSchema);
 
