@@ -1,12 +1,19 @@
 const express = require('express');
 // IMPORTING CONTROLLERS
+const ratelimit =require('express-rate-limit')
 const userController = require('../controllers/userController');
 const authController = require('../controllers/authController');
+
+const loginLimiter = ratelimit({
+    max: 10,
+    windowMs: 30 * 60 * 1000,
+    message: 'Too many requests from this IP. Please try again after 30 min ',
+  });
 
 const router = express.Router();
 
 router.post('/signup', authController.signUp);
-router.post('/login', authController.login);
+router.post('/login',loginLimiter, authController.login);
 router.post('/forgotPassword', authController.forgotPassword);
 router.patch('/resetpassword/:token', authController.resetPassword);
 router.get('/me', authController.protect, userController.getMe, userController.getUser);
