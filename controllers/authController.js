@@ -43,7 +43,7 @@ exports.login = catchAsync(async (req, res, next) => {
   createSendToken(user, 200, res);
 });
 
-exports.protect = async function (req, res, next) {
+exports.protect = catchAsync(async function (req, res, next) {
   // 1) Cheking token and if its there!
   let token;
   if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
@@ -57,9 +57,7 @@ exports.protect = async function (req, res, next) {
   }
 
   const decoded = await util.promisify(jwt.verify)(token, process.env.JWT_SECRET);
-  if(!decoded){
-    return next(new AppError('Token is invalid',401))
-  }
+  
   const currentUser = await User.findById(decoded.id);
 
   if (!currentUser) {
@@ -73,7 +71,7 @@ exports.protect = async function (req, res, next) {
   }
   req.user = currentUser;
   next();
-};
+});
 
 exports.restrictTo = function (...roles) {
   return (req, res, next) => {
