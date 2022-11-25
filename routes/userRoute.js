@@ -5,9 +5,14 @@ const userController = require('../controllers/userController');
 const authController = require('../controllers/authController');
 
 const loginLimiter = ratelimit({
-    max: 10,
+    max: 5,
     windowMs: 30 * 60 * 1000,
-    message: 'Too many requests from this IP. Please try again after 30 min ',
+    // message: 'Too many requests from this IP. Please try again after 30 min ',
+    handler: (request, response, next, options) =>
+		response.status(429).json({
+            status:'failed',
+            message:'Too many requests from this IP. Please try again after 30 min',
+        }),
   });
 
 const router = express.Router();
