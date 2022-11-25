@@ -8,10 +8,10 @@ const loginLimiter = ratelimit({
     max: 5,
     windowMs: 30 * 60 * 1000,
     // message: 'Too many requests from this IP. Please try again after 30 min ',
-    handler: (request, response, next, options) =>
+    handler: (request, response, next, ) =>
 		response.status(429).json({
             status:'failed',
-            message:'Too many requests from this IP. Please try again after 30 min',
+            message:'Too many attempts. Please try again after 30 min',
         }),
   });
 
