@@ -47,7 +47,6 @@ const usersSchema = new mongoose.Schema({
 
 // Middlewares
 usersSchema.pre('save', async function (next) {
-  console.log(this);
   if (!this.isModified('password')) return next();
   this.password = await bcrypt.hash(this.password, process.env.BCRYPT_SALT * 1);
   this.passwordConfirm = undefined;
@@ -75,7 +74,6 @@ usersSchema.methods.createResetToken = function () {
   const resetToken = crypto.randomBytes(32).toString('hex');
   this.passwordResetToken = crypto.createHash('sha256').update(resetToken).digest('hex');
   this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
-  console.log('AAA', this);
   return resetToken;
 };
 const User = mongoose.model('User', usersSchema);

@@ -28,8 +28,6 @@ const sendErrorDev = function (err, res) {
     stack: err.stack,
   });
 };
-
-
 const sendErrorProd = function (err, res) {
   if (err.isOperational) {
     // catches all the expected errors

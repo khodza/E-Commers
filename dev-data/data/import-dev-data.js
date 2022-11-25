@@ -22,7 +22,7 @@ const importData = async () => {
   try {
     await User.create(users);
     await Product.create(products);
-    console.log('Data loaded succesifully!');
+    console.log('Data loaded successifully!');
   } catch (err) {
     console.log(err);
   }
@@ -32,7 +32,7 @@ const deleteData = async () => {
   try {
     await User.deleteMany();
     await Product.deleteMany();
-    console.log('Data deleted succesifully!');
+    console.log('Data deleted successifully!');
   } catch (err) {
     console.log(err);
   }

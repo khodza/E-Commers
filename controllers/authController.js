@@ -21,7 +21,7 @@ const createSendToken = (user, statusCode, res) => {
   };
   user.password = undefined;
   res.status(statusCode).json({
-    status: 'succes',
+    status: 'success',
     token,
     cookieOptions,
     data: {
@@ -131,11 +131,10 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     });
 
     res.status(200).json({
-      status: 'succes',
+      status: 'success',
       message: 'Token sent to email!',
     });
   } catch (err) {
-    console.log(err);
     user.passwordResetToken = undefined;
     user.passwordResetExpires = undefined;
     await user.save({ validateBeforeSave: false });
@@ -163,7 +162,6 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   if (!user) {
     return next(new AppError('Invalid token or its already has been expired!'));
   }
-  console.log(hashedToken, user);
   user.password = req.body.password;
   user.passwordConfirm = req.body.passwordConfirm;
   user.passwordResetToken = undefined;

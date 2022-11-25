@@ -18,7 +18,7 @@ exports.getAll = (Model) => catchAsync(async (req, res, next) => {
   const doc = await Model.find();
 
   res.status(200).json({
-    status: 'succes',
+    status: 'success',
     result: doc.length,
     data: {
       data: doc,
@@ -32,7 +32,7 @@ exports.getOne = (Model) => catchAsync(async (req, res, next) => {
     return next(new AppError('Document with given ID not found', 404));
   }
   res.status(200).json({
-    status: 'succes',
+    status: 'success',
     data: {
       doc,
     },
@@ -54,7 +54,7 @@ exports.updateOne = (Model) => catchAsync(async (req, res, next) => {
   }
 
   res.status(200).json({
-    status: 'succes',
+    status: 'success',
     data: {
       data: doc,
     },
