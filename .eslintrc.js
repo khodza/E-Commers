@@ -20,5 +20,6 @@ module.exports = {
     'func-names': 0,
     radix: 0,
     'no-unused-vars': ['error', { argsIgnorePattern: 'req|res|next|val|props' }],
+    'no-console': 1,
   },
 };
