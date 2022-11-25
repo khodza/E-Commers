@@ -53,7 +53,7 @@ module.exports = (err, req, res, next) => {
     sendErrorDev(err, res);
   } else if (process.env.NODE_ENV === 'production') {
     let error = { ...err };
-
+    console.log(error);
     if (error.name === 'CastError') {
       // err-example:searching for product with invalid id
       error = handleCastError(error);
@@ -64,7 +64,7 @@ module.exports = (err, req, res, next) => {
     if (error._message === 'Validation failed') {
       error = handleValidationErrorDB(error);
     }
-    if (error.name === 'JsonWebTokenErro') {
+    if (error.name === 'JsonWebTokenError') {
       error = handleJWTError();
     }
     if (error.name === 'TokenExpiredError') {
