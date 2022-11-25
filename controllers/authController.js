@@ -57,6 +57,9 @@ exports.protect = async function (req, res, next) {
   }
 
   const decoded = await util.promisify(jwt.verify)(token, process.env.JWT_SECRET);
+  if(!decoded){
+    return next(new AppError('Token is invalid',401))
+  }
   const currentUser = await User.findById(decoded.id);
 
   if (!currentUser) {
