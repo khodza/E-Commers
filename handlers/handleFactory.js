@@ -15,9 +15,9 @@ exports.createOne = (Model) => catchAsync(async (req, res, next) => {
 });
 
 exports.getAll = (Model) => catchAsync(async (req, res, next) => {
-  const query =new Features(Model.find(),req.query).filter()
+  const features =new Features(Model.find(),req.query).filter().sort()
 
-  const doc  = await query;
+  const doc  = await features.query;
 
   res.status(200).json({
     status: 'success',
