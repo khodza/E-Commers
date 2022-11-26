@@ -1,6 +1,7 @@
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const User = require('../modules/usersModule');
+const Features =require('../utils/features')
 
 exports.createOne = (Model) => catchAsync(async (req, res, next) => {
   const doc = await Model.create(req.body);
@@ -14,14 +15,7 @@ exports.createOne = (Model) => catchAsync(async (req, res, next) => {
 });
 
 exports.getAll = (Model) => catchAsync(async (req, res, next) => {
-  // Filters should be added
-  const queryObj ={...req.query};
-  const excludedFields =['page','sort','limit'];
-  excludedFields.forEach(el=>delete queryObj[el]);
-  let queryStr =JSON.stringify(queryObj);
-  queryStr =queryStr.replace(/\b(gte|gt|lte|lt)\b/g,match=>`${match}`)
-  
-  const query =  Model.find(JSON.parse(queryStr));
+  const query =new Features(Model.find(),req.query).filter()
 
   const doc  = await query;
 
