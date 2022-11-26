@@ -48,7 +48,7 @@ exports.login = catchAsync(async (req, res, next) => {
 });
 
 exports.protect = catchAsync(async (req, res, next) => {
-  // 1) Cheking token and if its there!
+  // 1) Checking token and if its there!
   let token;
   if (
     req.headers.authorization && req.headers.authorization.startsWith('Bearer')
@@ -100,7 +100,7 @@ exports.restrictTo = function (...roles) {
 exports.updateMyPassword = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.user.id).select('+password');
   if (!(await user.correctPassword(req.body.passwordCurrent, user.password))) {
-    return next(new AppError('Your curret password is wrong!', 400));
+    return next(new AppError('Your current password is wrong!', 400));
   }
   user.password = req.body.password;
   user.passwordConfirm = req.body.passwordConfirm;
@@ -141,7 +141,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 
     return next(
       new AppError(
-        'There was an error sending email.Please try again larer!',
+        'There was an error sending email.Please try again later!',
         500,
       ),
     );

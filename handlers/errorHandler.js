@@ -5,8 +5,8 @@ const handleCastError = function (err) {
   return new AppError(message, 400);
 };
 
-const handleDublicateFields = function (err) {
-  const message = `Dublicate field value ${err.keyValue.name}.Please use another value`;
+const handleDuplicateFields = function (err) {
+  const message = `Duplicate field value ${err.keyValue.name}.Please use another value`;
   return new AppError(message, 404);
 };
 
@@ -59,7 +59,7 @@ module.exports = (err, req, res, next) => {
       error = handleCastError(error);
     }
     if (error.code === 11000) {
-      error = handleDublicateFields(error);
+      error = handleDuplicateFields(error);
     }
     if (error._message === 'Validation failed') {
       error = handleValidationErrorDB(error);

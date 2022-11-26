@@ -60,7 +60,7 @@ app.use(mongoSanitize());
 
 // DATA SANITIZATION AGAINST XSS
 app.use(xss());
-// PREVENT PARAMETR POLLUTION
+// PREVENT PARAMETER POLLUTION
 app.use(
   hpp({
     whitelist: ['price'],

@@ -28,7 +28,8 @@ exports.getAll = (Model) => catchAsync(async (req, res, next) => {
   });
 });
 exports.getOne = (Model) => catchAsync(async (req, res, next) => {
-  // Shold add popOptions for comments ,products, reviews
+  //TODO
+  // Should add popOptions for comments ,products, reviews
   const doc = await Model.findById(req.params.id);
   if (!doc) {
     return next(new AppError('Document with given ID not found', 404));
