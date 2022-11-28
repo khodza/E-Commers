@@ -1,2 +1,10 @@
 //TODO
-fix seller role
+CRUD for reviews//done
+restrict reviews
+test crud
+/poping
+Connect to users
+Connect to products
+calculate ratingAVG based on reviews
+
+write doc for review routes
