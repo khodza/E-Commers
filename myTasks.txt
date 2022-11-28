@@ -1,3 +1,2 @@
 //TODO
-get stats
-review part left
+in stock

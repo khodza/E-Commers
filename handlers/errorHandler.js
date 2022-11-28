@@ -16,6 +16,10 @@ const handleValidationErrorDB = function (err) {
   return new AppError(message, 400);
 };
 
+// const handleWeekPassword =function(err){
+
+// }
+
 const handleJWTError = () => new AppError('Invalid token. Please login again!', 401);
 
 const handleExpiredToken = () => new AppError('Expired token! Please login again', 401);
@@ -53,7 +57,6 @@ module.exports = (err, req, res, next) => {
     sendErrorDev(err, res);
   } else if (process.env.NODE_ENV === 'production') {
     let error = { ...err };
-    console.log(error);
     if (error.name === 'CastError') {
       // err-example:searching for product with invalid id
       error = handleCastError(error);

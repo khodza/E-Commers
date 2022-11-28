@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
+const AppError = require('../utils/appError');
+const schemaValidator =require('../utils/validatePassword')
 
 const usersSchema = new mongoose.Schema({
   name: {
@@ -20,13 +22,12 @@ const usersSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['admin', 'user'],
+    enum: ['admin', 'user','seller'],
     default: 'user',
   },
   password: {
     type: String,
     required: [true, 'Please provide your password'],
-    minlenght: 8,
     select: false,
   },
   passwordConfirm: {
@@ -45,9 +46,15 @@ const usersSchema = new mongoose.Schema({
   passwordResetExpires: Date,
 });
 
-// Middlewares
+// Middleware
 usersSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
+  if(!schemaValidator.validate(this.password)){
+    const message =schemaValidator.validate(this.password,{details:true})[0].message;
+    return next(new AppError(message,500))
+  }
+  schemaValidator.validate(this.password,{details:true})
+
   this.password = await bcrypt.hash(this.password, process.env.BCRYPT_SALT * 1);
   this.passwordConfirm = undefined;
   next();
@@ -61,11 +68,11 @@ usersSchema.pre('save', function (next) {
 
 // Methods
 usersSchema.methods.correctPassword = async (candidatePassword, userPassword) => await bcrypt.compare(candidatePassword, userPassword);
-usersSchema.methods.changedPasswordAfter = function (JWTtimestamp) {
+usersSchema.methods.changedPasswordAfter = function (JWTtimeStamp) {
   if (this.passwordChangedAt) {
     const changedTimestamp = parseInt(this.passwordChangedAt.getTime() / 1000);
 
-    return JWTtimestamp < changedTimestamp;
+    return JWTtimeStamp < changedTimestamp;
   }
   return false;
 };
