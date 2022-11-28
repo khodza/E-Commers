@@ -1,2 +1,2 @@
 //TODO
-in stock
+fix seller role
