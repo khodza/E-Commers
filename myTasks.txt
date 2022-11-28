@@ -1,7 +1,7 @@
 //TODO
 CRUD for reviews//done
-restrict reviews
-test crud
+restrict reviews//done
+test crud//done
 /poping
 Connect to users
 Connect to products
