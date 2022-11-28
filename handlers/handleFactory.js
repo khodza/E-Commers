@@ -23,7 +23,7 @@ exports.getAll = (Model) => catchAsync(async (req, res, next) => {
     status: 'success',
     result: doc.length,
     data: {
-      data: doc,
+       doc,
     },
   });
 });
@@ -59,7 +59,7 @@ exports.updateOne = (Model) => catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: 'success',
     data: {
-      data: doc,
+      doc,
     },
   });
 });
