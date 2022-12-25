@@ -1,4 +1,6 @@
 //TODO
+
+//write all code in typeScript
 CRUD for reviews//done
 restrict reviews//done
 test crud//done
