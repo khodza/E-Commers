@@ -5,6 +5,7 @@ const handleCastError = function (err) {
   return new AppError(message, 400);
 };
 
+console.log('hello');
 const handleDuplicateFields = function (err) {
   const message = `Duplicate field value ${err.keyValue.name}.Please use another value`;
   return new AppError(message, 404);
